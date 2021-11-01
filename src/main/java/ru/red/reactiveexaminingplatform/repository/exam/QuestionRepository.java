@@ -2,7 +2,6 @@ package ru.red.reactiveexaminingplatform.repository.exam;
 
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import org.springframework.data.repository.query.Param;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.red.reactiveexaminingplatform.domain.exam.Question;
@@ -14,12 +13,12 @@ public interface QuestionRepository extends ReactiveMongoRepository<Question, UU
 
     Mono<Question> findByDescription(String description);
 
-    @Query("{\"title\": /.*:title.*/}")
-    Flux<Question> findAllByTitle(@Param("title") String title);
+    @Query("{\"title\": /.*?0.*/}")
+    Flux<Question> findAllByTitle(String title);
 
-    @Query("{\"description\": /.*:description.*/}")
-    Flux<Question> findAllByDescription(@Param("description") String description);
+    @Query("{\"description\": /.*?0.*/}")
+    Flux<Question> findAllByDescription(String description);
 
-    @Query("{\"examId\": :examId")
-    Flux<Question> findAllByExamId(@Param("examId") UUID examId);
+    @Query("{\"examId\": ?0")
+    Flux<Question> findAllByExamId(UUID examId);
 }
