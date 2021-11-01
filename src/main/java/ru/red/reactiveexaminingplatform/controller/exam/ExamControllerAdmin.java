@@ -1,4 +1,4 @@
 package ru.red.reactiveexaminingplatform.controller.exam;
 
-public class ExamAdminController {
+public class ExamControllerAdmin {
 }

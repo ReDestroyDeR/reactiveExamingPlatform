@@ -1,2 +1,4 @@
-package ru.red.reactiveexaminingplatform.service.exam;public class QuestionServiceAdmin {
+package ru.red.reactiveexaminingplatform.service.exam;
+
+public class QuestionServiceAdmin {
 }

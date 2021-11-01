@@ -1,18 +1,18 @@
-package ru.red.reactiveexaminingplatform.service.util;
+package ru.red.reactiveexaminingplatform.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ReactiveCrudService<T, ID> {
-    void save(T object);
+    Mono<T> save(T object);
 
-    Mono<T> delete(T object);
+    Mono<Void> delete(T object);
 
-    Mono<T> deleteById(ID id);
+    Mono<Void> deleteById(ID id);
 
     Mono<Boolean> exists(ID id);
 
-    Mono<T> get(ID id);
+    Mono<T> findById(ID id);
 
-    Flux<T> getAll();
+    Flux<T> findAll();
 }

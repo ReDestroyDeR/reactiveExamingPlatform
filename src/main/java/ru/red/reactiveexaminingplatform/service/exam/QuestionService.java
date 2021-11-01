@@ -2,17 +2,11 @@ package ru.red.reactiveexaminingplatform.service.exam;
 
 import reactor.core.publisher.Flux;
 import ru.red.reactiveexaminingplatform.domain.exam.Question;
-import ru.red.reactiveexaminingplatform.service.util.ReactiveDeleteService;
-import ru.red.reactiveexaminingplatform.service.util.ReactiveReadService;
-import ru.red.reactiveexaminingplatform.service.util.ReactiveUpdateService;
+import ru.red.reactiveexaminingplatform.service.ReactiveCrudService;
 
 import java.util.UUID;
 
-public interface QuestionService extends ReactiveReadService<Question, UUID>,
-                                        ReactiveUpdateService<Question, UUID>,
-                                        ReactiveDeleteService<Question, UUID> {
-    void create(Question question, UUID examUUID);
-
+public interface QuestionService extends ReactiveCrudService<Question, UUID> {
     Flux<Question> getAll(UUID examUUID);
 
     Flux<Question> findByTitle(String title);
