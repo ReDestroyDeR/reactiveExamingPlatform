@@ -2,6 +2,7 @@ package ru.red.reactiveexaminingplatform.domain.exam;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.UUID;
 @Setter
 @Document
 public class Participation {
+    @Id
+    private UUID uuid;
     private UUID userUUID;
     private final UUID examUUID;
     private final long examSeed;
@@ -38,11 +41,14 @@ public class Participation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Participation that = (Participation) o;
-        return examSeed == that.examSeed && finished == that.finished && examUUID.equals(that.examUUID) && answers.equals(that.answers);
+        return uuid.equals(that.uuid)
+                && examSeed == that.examSeed
+                && finished == that.finished
+                && examUUID.equals(that.examUUID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(examUUID, examSeed, answers, finished);
+        return Objects.hash(uuid, examUUID, examSeed, finished);
     }
 }
