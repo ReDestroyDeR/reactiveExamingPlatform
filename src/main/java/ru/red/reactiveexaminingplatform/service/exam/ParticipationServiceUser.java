@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import ru.red.reactiveexaminingplatform.domain.exam.Participation;
 import ru.red.reactiveexaminingplatform.domain.exam.Question;
+import ru.red.reactiveexaminingplatform.domain.identity.User;
 import ru.red.reactiveexaminingplatform.service.identity.UserService;
 
 import java.util.Set;
@@ -40,24 +41,26 @@ public class ParticipationServiceUser implements ParticipationService {
     }
 
     @Override
-    public Mono<Participation> submit(Participation participation) {
-        return userService.findById(participation.getUuid())
-                .map(user -> {
-                    participation.setFinished(true);
+    public Mono<Participation> save(User user, Participation participation) {
+        user.getParticipationSet().add(participation);
+        return Mono.just(participation);
+    }
 
-                    Set<Participation> participationSet = user.getParticipationSet();
+    @Override
+    public Mono<Participation> submit(User user, Participation participation) {
+        Set<Participation> participationSet = user.getParticipationSet();
 
-                    if (participationSet.stream()
-                            .dropWhile(p -> !p.equals(participation))
-                            .findFirst()
-                            .orElseThrow()
-                            .isFinished())
-                        throw new IllegalStateException("Participation is already finished");
+        if (participationSet.stream()
+                .dropWhile(p -> !p.equals(participation))
+                .findFirst()
+                .orElseThrow()
+                .isFinished())
+            throw new IllegalStateException("Participation is already finished");
 
-                    participationSet.add(participation);
-                    userService.save(user);
+        participationSet.add(participation);
+        participation.setFinished(true);
+        userService.save(user);
 
-                    return participation;
-                });
+        return Mono.just(participation);
     }
 }

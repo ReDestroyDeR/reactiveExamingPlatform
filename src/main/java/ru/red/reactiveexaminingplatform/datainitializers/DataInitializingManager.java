@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Profile("test")
+@Profile("data-initialize")
 @Component
 public class DataInitializingManager {
     public DataInitializingManager(List<DataInitializer> initializers) {

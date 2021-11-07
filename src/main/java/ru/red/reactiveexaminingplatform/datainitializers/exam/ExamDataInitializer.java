@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @Component
 @Order(1)
-@Profile("test")
+@Profile("data-initialize")
 public class ExamDataInitializer implements DataInitializer {
     private final ExamRepository examRepository;
 

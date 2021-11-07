@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 @Order(100)
 @Component
-@Profile("test")
+@Profile("data-initialize")
 public class UserDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final ExamRepository examRepository;
