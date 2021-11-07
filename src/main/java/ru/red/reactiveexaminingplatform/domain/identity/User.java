@@ -21,8 +21,8 @@ public class User implements UserDetails {
     private UUID uuid;
     private String username;
     private String password;
-    private final Set<Authority> authorities;
-    private final Set<Participation> participationSet;
+    private Set<Authority> authorities;
+    private Set<Participation> participationSet;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;

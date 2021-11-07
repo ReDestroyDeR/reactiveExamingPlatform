@@ -14,6 +14,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static ru.red.reactiveexaminingplatform.util.QuestionUtils.*;
+
 @Component
 @Order(1)
 @Profile("data-initialize")
@@ -39,20 +41,9 @@ public class ExamDataInitializer implements DataInitializer {
                                     QuestionType type = QuestionType.values()[random.nextInt(0, 2)];
                                     Question question;
                                     switch (type) {
-                                        case SELECT -> question = Question.createSelect(
-                                                Stream.iterate(0, q -> q + 1)
-                                                        .limit(random.nextInt(2, 10))
-                                                        .map(q -> "Answer " + q)
-                                                        .collect(Collectors.toList())
-                                                        .toArray(String[]::new)
-                                        );
-
-                                        case WRITE_EXACT -> question = Question.createWriteExact(
-                                                String.valueOf(random.nextInt(100))
-                                        );
-
-                                        case EXPLAIN -> question = Question.createExplain();
-
+                                        case SELECT -> question = randomSelect();
+                                        case WRITE_EXACT -> question = randomWriteExact();
+                                        case EXPLAIN -> question = randomExplain();
                                         default -> throw new UnsupportedOperationException();
                                     }
 
