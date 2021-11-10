@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "examining.tests.db.timeout",
+      "type": "java.lang.Long",
+      "description": "Database result timeout in seconds."
+    }
+  ]
+}

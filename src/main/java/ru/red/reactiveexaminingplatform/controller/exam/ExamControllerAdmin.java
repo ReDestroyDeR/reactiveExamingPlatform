@@ -10,6 +10,8 @@ import reactor.core.publisher.Mono;
 import ru.red.reactiveexaminingplatform.domain.exam.Exam;
 import ru.red.reactiveexaminingplatform.service.exam.ExamService;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/admin/exam")
 public class ExamControllerAdmin {
@@ -21,8 +23,8 @@ public class ExamControllerAdmin {
     }
 
     @PostMapping
-    public Mono<Exam> createExam(@RequestBody Exam exam) {
-        return Mono.empty();
+    public Mono<String> createExam(@RequestBody Exam exam) {
+        return examService.save(exam).map(Exam::getUuid).map(UUID::toString);
     }
 
 

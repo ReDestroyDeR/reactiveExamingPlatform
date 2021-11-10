@@ -6,3 +6,8 @@ spring:
       database: "examining_platform_test"
       username: "root"
       password: "root"
+
+examining:
+  tests:
+    db:
+      timeout: 5
