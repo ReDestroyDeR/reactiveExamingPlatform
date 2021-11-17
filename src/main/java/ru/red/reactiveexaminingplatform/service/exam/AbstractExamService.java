@@ -3,6 +3,7 @@ package ru.red.reactiveexaminingplatform.service.exam;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.red.reactiveexaminingplatform.domain.exam.Exam;
+import ru.red.reactiveexaminingplatform.exception.NotFound;
 import ru.red.reactiveexaminingplatform.repository.exam.ExamRepository;
 
 import java.util.UUID;
@@ -31,7 +32,8 @@ public abstract class AbstractExamService implements ExamService {
 
     @Override
     public Mono<Exam> findById(UUID uuid) {
-        return examRepository.findById(uuid);
+        return examRepository.findById(uuid)
+                .switchIfEmpty(Mono.error(new NotFound()));
     }
 
     @Override

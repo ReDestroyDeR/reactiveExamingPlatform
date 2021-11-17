@@ -10,6 +10,11 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
     @Override
+    public Mono<User> create(User object) {
+        return null;
+    }
+
+    @Override
     public Mono<User> save(User object) {
         return null;
     }

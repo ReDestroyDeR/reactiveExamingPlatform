@@ -1,5 +1,6 @@
 package ru.red.reactiveexaminingplatform.repository.exam;
 
+import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
@@ -9,6 +10,9 @@ import ru.red.reactiveexaminingplatform.domain.exam.Exam;
 import java.util.UUID;
 
 public interface ExamRepository extends ReactiveMongoRepository<Exam, UUID> {
+    @DeleteQuery("{_id:?0}")
+    Mono<Long> deleteByUuidReturningDeletedCount(UUID uuid);
+
     Mono<Exam> findByTitle(String title);
 
     Mono<Exam> findByDescription(String description);

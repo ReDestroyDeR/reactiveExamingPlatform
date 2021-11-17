@@ -16,6 +16,11 @@ public class ExamServiceUser extends AbstractExamService {
     }
 
     @Override
+    public Mono<Exam> create(Exam object) {
+        return Mono.error(new UnsupportedOperationException("User can't manipulate exams"));
+    }
+
+    @Override
     public Mono<Exam> save(Exam exam) {
         return Mono.error(new UnsupportedOperationException("User can't manipulate exams"));
     }

@@ -4,6 +4,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ReactiveCrudService<T, ID> {
+    Mono<T> create(T object);
+
     Mono<T> save(T object);
 
     Mono<Void> delete(T object);
